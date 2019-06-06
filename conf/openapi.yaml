@@ -1,0 +1,25 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Knot.x Starter Kit
+  description: Knotx Starter Kit
+
+servers:
+  - url: https://{domain}:{port}
+    description: The local API server
+    variables:
+      domain:
+        default: localhost
+        description: api domain
+      port:
+        enum:
+          - '9092'
+        default: '9092'
+
+paths:
+  /api/example:
+    get:
+      operationId: example-operation
+      responses:
+        default:
+          description: example api response
