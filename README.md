@@ -21,7 +21,7 @@ If you need to add a dependency that is not connected with any custom module lik
 ```
 dependencies {
     subprojects.forEach { "dist"(project(":${it.name}")) }
-    "dist"("io.knotx:knotx-dashboard")
+    "dist"("io.knotx:knotx-dashboard:${project.version}")
 }
 ```
 

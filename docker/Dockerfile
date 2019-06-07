@@ -1,10 +1,10 @@
 FROM knotx/knotx:2.0.0-SNAPSHOT
-LABEL maintainer="My Project"
+LABEL maintainer="Knot.x Project"
 
-COPY ./conf /usr/local/knotx/conf
-COPY ./lib /usr/local/knotx/lib
+COPY ./knotx /usr/local/knotx
 
-CMD [ "knotx", "run-knotx" ]
 
 HEALTHCHECK --interval=5s --timeout=2s --retries=12 \
   CMD curl --silent --fail localhost:9092/api/example || exit 1
+
+CMD [ "knotx", "run-knotx" ]
