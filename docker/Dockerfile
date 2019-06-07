@@ -1,4 +1,4 @@
-FROM skejven/knotx-2-workshop:3
+FROM knotx/knotx:2.0.0-SNAPSHOT
 LABEL maintainer="My Project"
 
 COPY ./conf /usr/local/knotx/conf

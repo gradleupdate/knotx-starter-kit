@@ -19,6 +19,7 @@ import com.bmuschko.gradle.docker.tasks.container.DockerStopContainer
 import com.bmuschko.gradle.docker.tasks.container.extras.DockerWaitHealthyContainer
 import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
 import com.bmuschko.gradle.docker.tasks.image.DockerRemoveImage
+import org.gradle.kotlin.dsl.resolver.buildSrcSourceRootsFilePath
 
 buildscript {
     repositories {
@@ -47,7 +48,7 @@ tasks.create("removeImage", DockerRemoveImage::class) {
 
 val buildImage by tasks.creating(DockerBuildImage::class) {
     group = "docker"
-    inputDir.set(file("$buildDir"))
+    inputDir.set(file("$buildDir/knotx"))
     tags.add("$dockerImageName:latest")
     dependsOn("removeImage", "prepareDocker")
 }

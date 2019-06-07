@@ -17,7 +17,7 @@ tasks.register<Copy>("copyModulesWithDeps") {
     group = "distribution"
 
     from(configurations.named("dist"))
-    into("$buildDir/lib")
+    into("$buildDir/knotx/lib")
 
     mustRunAfter("cleanDistribution")
 }
@@ -26,7 +26,7 @@ tasks.register<Copy>("copyConfigs") {
     group = "distribution"
 
     from("conf")
-    into("$buildDir/conf")
+    into("$buildDir/knotx/conf")
 
     mustRunAfter("cleanDistribution")
 }
@@ -35,16 +35,16 @@ tasks.register<Copy>("copyDockerfile") {
     group = "distribution"
 
     from("docker")
-    into("$buildDir")
+    into("$buildDir/knotx")
 
     mustRunAfter("cleanDistribution")
 }
 
 tasks.register<Delete>("cleanDistribution") {
-    group = "build"
+    group = "distribution"
 
     delete(fileTree("$buildDir").matching {
-        exclude(".docker")
+        include("knotx/**")
     })
 }
 

@@ -18,9 +18,8 @@ class ExampleApiITCase {
         get("/api/example").
         then()
         .assertThat().
-        statusCode(400);
+        statusCode(200);
     // @formatter:on
   }
-
 
 }

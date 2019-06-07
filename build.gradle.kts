@@ -26,6 +26,10 @@ dependencies {
     subprojects.forEach { "dist"(project(":${it.name}")) }
 }
 
+sourceSets.named("test") {
+    java.srcDir("functional/src/test/java")
+}
+
 allprojects {
     group = "com.project"
 
@@ -37,10 +41,6 @@ allprojects {
     }
 }
 
-sourceSets.named("test") {
-    java.srcDir("functional/src/test/java")
-}
-
 tasks.named("build") {
     dependsOn("runTest")
 }
@@ -48,5 +48,4 @@ tasks.named("build") {
 apply(from = "gradle/distribution.gradle.kts")
 apply(from = "gradle/javaAndUnitTests.gradle.kts")
 apply(from = "gradle/docker.gradle.kts")
-
 
