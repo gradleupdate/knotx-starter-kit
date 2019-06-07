@@ -3,3 +3,8 @@ LABEL maintainer="My Project"
 
 COPY ./conf /usr/local/knotx/conf
 COPY ./lib /usr/local/knotx/lib
+
+CMD [ "knotx", "run-knotx" ]
+
+HEALTHCHECK --interval=5s --timeout=2s --retries=12 \
+  CMD curl --silent --fail localhost:9092/api/example || exit 1

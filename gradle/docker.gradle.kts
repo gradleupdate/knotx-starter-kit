@@ -13,6 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import com.bmuschko.gradle.docker.tasks.container.DockerCreateContainer
+import com.bmuschko.gradle.docker.tasks.container.DockerStartContainer
+import com.bmuschko.gradle.docker.tasks.container.DockerStopContainer
+import com.bmuschko.gradle.docker.tasks.container.extras.DockerWaitHealthyContainer
 import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
 import com.bmuschko.gradle.docker.tasks.image.DockerRemoveImage
 
@@ -39,15 +43,47 @@ tasks.create("removeImage", DockerRemoveImage::class) {
     onlyIf(spec)
 
     targetImageId(if (File(dockerImageRef).exists()) File(dockerImageRef).readText() else "")
-    dependsOn("clean")
 }
 
-tasks.create("buildImage", DockerBuildImage::class) {
+val buildImage by tasks.creating(DockerBuildImage::class) {
     group = "docker"
-    description = "Build project Docker image."
-
     inputDir.set(file("$buildDir"))
     tags.add("$dockerImageName:latest")
+    dependsOn("removeImage", "prepareDocker")
+}
 
-    dependsOn("copyModulesWithDeps", "copyConfigs", "copyDockerfile")
+// FUNCTIONAL TESTS
+
+val createContainer by tasks.creating(DockerCreateContainer::class) {
+    group = "docker-functional-tests"
+    dependsOn(buildImage)
+    targetImageId(buildImage.getImageId())
+    portBindings.set(listOf("9092:9092"))
+    exposePorts("tcp", listOf(9092))
+    autoRemove.set(true)
+}
+
+val startContainer by tasks.creating(DockerStartContainer::class) {
+    group = "docker-functional-tests"
+    dependsOn(createContainer)
+    targetContainerId(createContainer.containerId)
+}
+
+val waitContainer by tasks.creating(DockerWaitHealthyContainer::class) {
+    group = "docker-functional-tests"
+    dependsOn(startContainer)
+    targetContainerId(createContainer.containerId)
+}
+
+val stopContainer by tasks.creating(DockerStopContainer::class) {
+    group = "docker-functional-tests"
+    targetContainerId(createContainer.containerId)
+}
+
+tasks.create("runTest", Test::class) {
+    group = "docker-functional-tests"
+    dependsOn(waitContainer)
+    finalizedBy(stopContainer)
+
+    include("**/*ITCase*")
 }

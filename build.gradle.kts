@@ -15,6 +15,7 @@
  */
 plugins {
     id("com.bmuschko.docker-remote-api") version "4.9.0"
+    id("java")
 }
 
 configurations {
@@ -36,5 +37,16 @@ allprojects {
     }
 }
 
-apply(from = "gradle/docker.gradle.kts")
+sourceSets.named("test") {
+    java.srcDir("functional/src/test/java")
+}
+
+tasks.named("build") {
+    dependsOn("runTest")
+}
+
 apply(from = "gradle/distribution.gradle.kts")
+apply(from = "gradle/javaAndUnitTests.gradle.kts")
+apply(from = "gradle/docker.gradle.kts")
+
+

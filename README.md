@@ -2,21 +2,18 @@
 
 ## How can I build my Docker image?
 ```
-./gradlew buildImage
-```
-
-All next builds should be preceded by a command:
-```
-./gradlew removeImage
+./gradlew build
 ```
 
 ## How can I run my Docker image?
 ```
-docker run -p9092:9092 knotx/knotx-starter-kit knotx run-knotx
+docker run -p9092:9092 knotx/knotx-starter-kit
 ```
 
-## How can I verify my Knot.x container?
+## How can I verify my Docker image?
+The project contains functional tests defined in the `functional` folder. Those tests run your Docker
+container and execute functional tests. 
 ```
-curl http://localhost:9092/api/example
+./gradlew runTest
 ```
-In the response you should see `Hello from Knot.x!`.
+Please note that functional tests uses port `9092`.

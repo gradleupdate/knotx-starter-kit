@@ -18,6 +18,8 @@ tasks.register<Copy>("copyModulesWithDeps") {
 
     from(configurations.named("dist"))
     into("$buildDir/lib")
+
+    mustRunAfter("cleanDistribution")
 }
 
 tasks.register<Copy>("copyConfigs") {
@@ -25,6 +27,8 @@ tasks.register<Copy>("copyConfigs") {
 
     from("conf")
     into("$buildDir/conf")
+
+    mustRunAfter("cleanDistribution")
 }
 
 tasks.register<Copy>("copyDockerfile") {
@@ -32,12 +36,18 @@ tasks.register<Copy>("copyDockerfile") {
 
     from("docker")
     into("$buildDir")
+
+    mustRunAfter("cleanDistribution")
 }
 
-tasks.register<Delete>("clean") {
+tasks.register<Delete>("cleanDistribution") {
     group = "build"
 
     delete(fileTree("$buildDir").matching {
         exclude(".docker")
     })
+}
+
+tasks.register("prepareDocker") {
+    dependsOn("cleanDistribution", "copyModulesWithDeps", "copyConfigs", "copyDockerfile")
 }
