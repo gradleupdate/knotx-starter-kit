@@ -1,6 +1,6 @@
 # Knot.x Starter Kit
 Knot.x Starter Kit is a template project that you can use when creating some Knot.x extensions.  It 
-allows you to easily integrate all custom modules with Knot.x Stack and builds a custom Docker image.
+allows you to easily integrate all custom modules with [Knot.x Stack](https://github.com/Knotx/knotx-stack) and build a custom Docker image.
 
 ## How to start
 To start a new Knot.x project with extensions simply download this repository as a ZIP and unzip it.
