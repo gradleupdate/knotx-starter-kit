@@ -56,5 +56,5 @@ new image and validate functional tests.
 
 ## How can I run my Docker image?
 ```
-docker run -p9092:9092 knotx/knotx-starter-kit
+docker run -p8092:8092 knotx/knotx-starter-kit
 ```
