@@ -2,6 +2,15 @@
 Knot.x Starter Kit is a template project that you can use when creating some Knot.x extensions.  It 
 allows you to easily integrate all custom modules with Knot.x Stack and builds a custom Docker image.
 
+## How to start
+To start a new Knot.x project with extensions simply download this repository as a ZIP and unzip it.
+
+You may also use the following command:
+```
+git clone --depth=1 git@github.com:Knotx/knotx-starter-kit.git knotx-example && rm -rf !$/.git
+```
+to clone the repository contents to the `knotx-example` directory and start without git history.
+
 ## What does it contain?
 It contains two custom modules:
 - custom [Action](https://github.com/Knotx/knotx-fragments-handler/tree/master/api) implementation in `modules/custom-action`
