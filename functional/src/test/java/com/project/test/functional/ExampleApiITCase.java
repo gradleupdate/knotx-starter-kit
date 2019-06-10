@@ -13,7 +13,7 @@ class ExampleApiITCase {
   void callUndefinedRoute() {
     // @formatter:off
     given().
-        port(9092).
+        port(8092).
         when().
         get("/api/example").
         then()

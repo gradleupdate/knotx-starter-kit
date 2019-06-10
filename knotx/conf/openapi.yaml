@@ -13,8 +13,8 @@ servers:
         description: api domain
       port:
         enum:
-          - '9092'
-        default: '9092'
+          - '8092'
+        default: '8092'
 
 paths:
   /api/example:

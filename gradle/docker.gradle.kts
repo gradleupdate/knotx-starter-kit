@@ -19,7 +19,6 @@ import com.bmuschko.gradle.docker.tasks.container.DockerStopContainer
 import com.bmuschko.gradle.docker.tasks.container.extras.DockerWaitHealthyContainer
 import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
 import com.bmuschko.gradle.docker.tasks.image.DockerRemoveImage
-import org.gradle.kotlin.dsl.resolver.buildSrcSourceRootsFilePath
 
 buildscript {
     repositories {
@@ -44,6 +43,10 @@ tasks.create("removeImage", DockerRemoveImage::class) {
     onlyIf(spec)
 
     targetImageId(if (File(dockerImageRef).exists()) File(dockerImageRef).readText() else "")
+    onError {
+        if (!this.message!!.contains("No such image"))
+            throw this
+    }
 }
 
 val buildImage by tasks.creating(DockerBuildImage::class) {
@@ -59,8 +62,8 @@ val createContainer by tasks.creating(DockerCreateContainer::class) {
     group = "docker-functional-tests"
     dependsOn(buildImage)
     targetImageId(buildImage.getImageId())
-    portBindings.set(listOf("9092:9092"))
-    exposePorts("tcp", listOf(9092))
+    portBindings.set(listOf("8092:8092"))
+    exposePorts("tcp", listOf(8092))
     autoRemove.set(true)
 }
 
