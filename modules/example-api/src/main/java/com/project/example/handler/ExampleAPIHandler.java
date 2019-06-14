@@ -10,7 +10,7 @@ public class ExampleAPIHandler implements RoutingHandlerFactory {
 
   @Override
   public String getName() {
-    return "example-api-handler";
+    return "example-api";
   }
 
   @Override
