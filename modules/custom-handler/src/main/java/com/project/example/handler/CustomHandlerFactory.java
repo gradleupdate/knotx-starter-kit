@@ -8,6 +8,8 @@ import io.vertx.reactivex.ext.web.RoutingContext;
 
 public class CustomHandlerFactory implements RoutingHandlerFactory {
 
+  private static final JsonObject DEFAULT_NO_BODY = new JsonObject().put("status", "failed");
+
   @Override
   public String getName() {
     return "custom-handler";
@@ -16,7 +18,7 @@ public class CustomHandlerFactory implements RoutingHandlerFactory {
   @Override
   public Handler<RoutingContext> create(Vertx vertx, JsonObject config) {
     return event -> {
-      event.response().end(config.getJsonObject("body", new JsonObject().put("status", "failed")).encode());
+      event.response().end(config.getJsonObject("body", DEFAULT_NO_BODY).encode());
     };
   }
 }
