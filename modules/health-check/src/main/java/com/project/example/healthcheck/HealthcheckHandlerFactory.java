@@ -14,7 +14,7 @@ public class HealthcheckHandlerFactory implements RoutingHandlerFactory {
 
   @Override
   public String getName() {
-    return "healthcheck-handler";
+    return "healthcheck";
   }
 
   @Override
