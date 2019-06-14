@@ -17,6 +17,8 @@ rootProject.name = "knotx-starter-kit"
 
 include("custom-action")
 include("custom-handler")
+include("health-check")
 
 project(":custom-action").projectDir = file("modules/custom-action")
 project(":custom-handler").projectDir = file("modules/custom-handler")
+project(":health-check").projectDir = file("modules/health-check")

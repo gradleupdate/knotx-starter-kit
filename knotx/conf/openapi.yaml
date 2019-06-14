@@ -23,3 +23,16 @@ paths:
       responses:
         default:
           description: example api response
+  /healthcheck:
+    get:
+      operationId: healthcheck-operation
+      # https://vertx.io/docs/vertx-health-check/java/
+      responses:
+        '200':
+          description: Everything is fine
+        '204':
+          description: No procedure are registered.
+        '501':
+          description: At least one procedure has reported a non-healthy stat
+        '500':
+          description: One procedure has thrown an error or has not reported a status in time
