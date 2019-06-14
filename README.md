@@ -1,9 +1,9 @@
 # Knot.x Starter Kit
-Knot.x Starter Kit is a template project that you can use when creating some Knot.x extensions.  It 
-allows you to easily integrate all custom modules with [Knot.x Stack](https://github.com/Knotx/knotx-stack) and build a custom Docker image.
+Knot.x Starter Kit is a template project that simplifies Knot.x project setup. It allows you to customize
+[Knot.x Stack](https://github.com/Knotx/knotx-stack) and deliver it as a Docker image.
 
 ## How to start
-To start a new Knot.x project with extensions simply download this repository as a ZIP and unzip it.
+To start a new Knot.x project with extensions simply **download this repository as a ZIP** and unzip it.
 
 You may also use the following command:
 ```
@@ -12,16 +12,16 @@ git clone --depth=1 git@github.com:Knotx/knotx-starter-kit.git knotx-example && 
 to clone the repository contents to the `knotx-example` directory and start without git history.
 
 ## What does it contain?
-It contains two custom modules:
-- custom [Action](https://github.com/Knotx/knotx-fragments-handler/tree/master/api) implementation in `modules/custom-action`
-- custom [Routing Handler](https://github.com/Knotx/knotx-server-http/tree/master/api) implementation in `modules/custom-handler`
 
-Both modules are built to JAR files and copied to `KNOTX_HOME/lib` folder in Docker image. Also 
-all transitive dependencies are automatically downloaded and added to Docker image.
+- [Example API](https://github.com/Knotx/knotx-server-http/tree/master/api) implementation in `modules/example-api`
+- [Healthcheck](https://vertx.io/docs/vertx-health-check/java/) implementation in `modules/health-check`
+
+All modules are built into JAR files and copied to the `KNOTX_HOME/lib` folder in the project Docker image. 
+Also all transitive dependencies are automatically downloaded and added to the Docker image.
 
 You can also override the [default Knot.x configuration](https://github.com/Knotx/knotx-stack/tree/master/src/main/packaging/conf)
 with your custom settings. All files from `/conf` directory are copied to `KNOTX_HOME/conf`. So you
-can easily modify Knot.x configuration, reconfigure logger or update [Open API](https://github.com/OAI/OpenAPI-Specification) specification.
+can easily modify Knot.x configuration, reconfigure a logger or update an [Open API](https://github.com/OAI/OpenAPI-Specification) specification.
 
 If you need to add a dependency that is not connected with any custom module like 
 [Knot.x Dashboard](https://github.com/Knotx/knotx-dashboard) you can add this entry in 

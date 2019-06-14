@@ -6,11 +6,11 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.reactivex.core.Vertx;
 import io.vertx.reactivex.ext.web.RoutingContext;
 
-public class CustomHandlerFactory implements RoutingHandlerFactory {
+public class ExampleAPIHandler implements RoutingHandlerFactory {
 
   @Override
   public String getName() {
-    return "custom-handler";
+    return "example-api-handler";
   }
 
   @Override

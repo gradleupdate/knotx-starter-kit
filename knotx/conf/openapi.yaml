@@ -19,10 +19,10 @@ servers:
 paths:
   /api/example:
     get:
-      operationId: example-operation
+      operationId: example-api-operation
       responses:
         default:
-          description: example api response
+          description: Example API response
   /healthcheck:
     get:
       operationId: healthcheck-operation
