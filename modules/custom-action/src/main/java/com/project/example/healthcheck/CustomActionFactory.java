@@ -1,4 +1,4 @@
-package com.project.example.action;
+package com.project.example.healthcheck;
 
 import io.knotx.fragments.handler.api.Action;
 import io.knotx.fragments.handler.api.ActionFactory;

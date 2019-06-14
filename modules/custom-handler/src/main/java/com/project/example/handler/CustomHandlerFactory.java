@@ -16,7 +16,7 @@ public class CustomHandlerFactory implements RoutingHandlerFactory {
   @Override
   public Handler<RoutingContext> create(Vertx vertx, JsonObject config) {
     return event -> {
-      event.response().end(config.getString("message", "No message defined."));
+      event.response().end(config.getJsonObject("body", new JsonObject().put("status", "failed")).encode());
     };
   }
 }
