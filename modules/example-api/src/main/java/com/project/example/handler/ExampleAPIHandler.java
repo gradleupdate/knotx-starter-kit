@@ -6,13 +6,13 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.reactivex.core.Vertx;
 import io.vertx.reactivex.ext.web.RoutingContext;
 
-public class CustomHandlerFactory implements RoutingHandlerFactory {
+public class ExampleAPIHandler implements RoutingHandlerFactory {
 
   private static final JsonObject DEFAULT_NO_BODY = new JsonObject().put("status", "failed");
 
   @Override
   public String getName() {
-    return "custom-handler";
+    return "example-api";
   }
 
   @Override
