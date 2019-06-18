@@ -1,4 +1,5 @@
-FROM knotx/knotx:2.0.0-RC2
+FROM knotx/knotx:$knotx_version
+
 LABEL maintainer="Knot.x Project"
 
 COPY ./knotx /usr/local/knotx

@@ -1,13 +1,11 @@
-val knotxVersion = "2.0.0-SNAPSHOT"
-
 plugins {
     `java-library`
 }
 
 dependencies {
-    implementation(platform("io.knotx:knotx-dependencies:$knotxVersion"))
+    implementation(platform("io.knotx:knotx-dependencies:${Build.KNOTX_VERSION}"))
     "io.knotx:knotx".let { v ->
-        implementation("$v-fragments-handler-api:$knotxVersion")
+        implementation("$v-fragments-handler-api:${Build.KNOTX_VERSION}")
     }
     "io.vertx:vertx".let { v ->
         implementation("$v-core")
