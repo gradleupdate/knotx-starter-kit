@@ -45,6 +45,7 @@ tasks.register<Copy>("copyDockerfile") {
 
     from("docker")
     into("$buildDir")
+    expand("knotx_version" to Build.KNOTX_VERSION)
 
     mustRunAfter("cleanDistribution")
 }
