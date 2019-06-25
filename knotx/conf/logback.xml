@@ -28,7 +28,7 @@
 
   <logger name="io.knotx" level="DEBUG"/>
   <logger name="io.vertx" level="DEBUG"/>
-  <logger name="com.codahale.metrics" level="TRACE"/>
+  <logger name="com.project.example" level="DEBUG"/>
 
   <root level="INFO">
     <appender-ref ref="CONSOLE"/>

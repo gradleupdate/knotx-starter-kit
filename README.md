@@ -32,8 +32,13 @@ docker run -p8092:8092 knotx/knotx-starter-kit
 
 ## What does it contain?
 
-- [Example API](https://github.com/Knotx/knotx-server-http/tree/master/api) implementation in `modules/example-api`
-- [Healthcheck](https://vertx.io/docs/vertx-health-check/java/) implementation in `modules/health-check`
+- [API Handler](https://github.com/Knotx/knotx-starter-kit/tree/master/modules/example-api) 
+that contains example implementation of a [**Handler**](https://github.com/Knotx/knotx-server-http/tree/master/api#routing-handlers) 
+- [Healthcheck](https://github.com/Knotx/knotx-starter-kit/tree/master/modules/health-check)
+that holds example implementation of a [Vert.x Healthcheck](https://vertx.io/docs/vertx-health-check/java/)
+- [Action](https://github.com/Knotx/knotx-starter-kit/tree/master/modules/example-action) that
+contains example implementation of a [Knot.x Action](https://github.com/Knotx/knotx-fragments/tree/master/handler/api#action)
+
 
 All modules are built into JAR files and copied to the `KNOTX_HOME/lib` folder in the project Docker image. 
 Also all transitive dependencies are automatically downloaded and added to the Docker image.
