@@ -5,27 +5,26 @@ configuration entries. Then it builds and validates your custom Docker image.
 
 
 ## How to build
-Simply clone the repository and remove `.git` folder
-```
-$> git clone --branch 2.0.0-RC4 --depth=1 https://github.com/Knotx/knotx-starter-kit.git my-knotx-starter-kit && rm -rf !$/.git
-$> cd my-knotx-starter-kit
-```
-and execute
-```
+To start a new Knot.x project simply download the chosen ZIP version from https://github.com/Knotx/knotx-starter-kit/tags.
+To use the latest DEV version download this [ZIP](https://github.com/Knotx/knotx-starter-kit/archive/master.zip).
 
+In the unziped folder run
+```
 $> ./gradlew build
 ```
+
 to:
 - build all your custom Knot.x modules
 - prepare your custom Docker image with all required dependencies (including your custom modules and 
 its transitive dependencies)
 - validate your Docker image with system tests
-`
+
 ## How to run
 Start Docker container
 ```
 docker run -p8092:8092 knotx/knotx-starter-kit
 ```
+
 and validate urls:
 - [localhost:8092/api/v1/example](http://localhost:8092/api/v1/example)
 - [localhost:8092/api/v2/example](http://localhost:8092/api/v2/example)
