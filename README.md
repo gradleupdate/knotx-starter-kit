@@ -6,7 +6,7 @@ configuration entries. Then it builds and validates your custom Docker image.
 
 ## How to build
 To start a new Knot.x project simply download the chosen ZIP version from https://github.com/Knotx/knotx-starter-kit/tags.
-To use the latest DEV version download this [ZIP](https://github.com/Knotx/knotx-starter-kit/archive/master.zip).
+To use the latest DEV version download this [ZIP](https://github.com/Knotx/knotx-starter-kit/archive/master.zip) and [switch to SNAPSHOT version](https://github.com/Knotx/knotx-starter-kit#how-to-work-with-snapshot).
 
 In the unziped folder run
 ```
