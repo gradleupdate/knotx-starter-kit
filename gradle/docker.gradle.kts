@@ -30,7 +30,6 @@ buildscript {
 }
 
 val dockerImageRef = "$buildDir/.docker/buildImage-imageId.txt"
-val dockerImageName = "knotx/knotx-starter-kit"
 
 tasks.create("removeImage", DockerRemoveImage::class) {
     group = "docker"
@@ -52,7 +51,7 @@ tasks.create("removeImage", DockerRemoveImage::class) {
 val buildImage by tasks.creating(DockerBuildImage::class) {
     group = "docker"
     inputDir.set(file("$buildDir"))
-    tags.add("$dockerImageName:latest")
+    tags.add("${project.property("docker.image.name")}:latest")
     dependsOn("removeImage", "prepareDocker")
 }
 
