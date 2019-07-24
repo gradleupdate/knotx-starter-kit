@@ -29,6 +29,32 @@ and validate urls:
 - [localhost:8092/api/v1/example](http://localhost:8092/api/v1/example)
 - [localhost:8092/api/v2/example](http://localhost:8092/api/v2/example)
 
+## How to debug
+
+#### Normal debugging
+Edit `Dockerfile` in `docker` folder by adding
+```dockerfile
+RUN sed -i 's/# JVM_DEBUG=/JVM_DEBUG=/g' /usr/local/knotx/bin/knotx
+```
+Start Docker container with additional port
+```cmd
+docker run -p8092:8092 -p18092:18092 knotx/knotx-starter-kit
+```
+
+#### Wait for debugger to attach on startup
+In addition to above edit `Dockerfile` by adding
+```dockerfile
+RUN sed -i 's/suspend=n/suspend=y/g' /usr/local/knotx/bin/knotx
+```
+
+Comment out health-check section from `Dockerfile`
+```dockerfile
+#HEALTHCHECK --interval=5s --timeout=2s --retries=12 \
+#  CMD curl --silent --fail localhost:8092/healthcheck || exit 1
+```
+
+**IMPORTANT !** - Make sure that `CMD [ "knotx", "run-knotx" ]` is a last command in `Dockerfile`
+
 ## What does it contain
 
 ### Custom modules
