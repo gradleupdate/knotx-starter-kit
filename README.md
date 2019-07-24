@@ -41,7 +41,7 @@ Start Docker container with additional port
 docker run -p8092:8092 -p18092:18092 knotx/knotx-starter-kit
 ```
 
-#### Wait for debugger to attach on startup
+#### Startup debugging
 In addition to above edit `Dockerfile` by adding
 ```dockerfile
 RUN sed -i 's/suspend=n/suspend=y/g' /usr/local/knotx/bin/knotx
