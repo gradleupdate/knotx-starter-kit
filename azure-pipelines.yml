@@ -28,7 +28,7 @@ steps:
     inputs:
       script: |
         cd knotx-aggregator/development
-        ./build-all.sh -r ../../knotx-repos
+        ./build-stack.sh -r ../../knotx-repos
     displayName: "Build Stack"
   - script: |
       cd knotx-repos/knotx-docker
