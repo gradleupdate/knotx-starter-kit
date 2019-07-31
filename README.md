@@ -1,5 +1,4 @@
 [![Build Status](https://dev.azure.com/knotx/Knotx/_apis/build/status/Knotx.knotx-starter-kit?branchName=master)](https://dev.azure.com/knotx/Knotx/_build/latest?definitionId=3&branchName=master)
-[![][license img]][license]
 
 # Knot.x Starter Kit
 Knot.x Starter Kit is a template project that simplifies Knot.x project setup. It allows you to 
