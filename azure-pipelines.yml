@@ -36,5 +36,5 @@ steps:
     displayName: "Build Docker image"
   - script: |
       cd knotx-repos/knotx-starter-kit
-      ./gradlew -Pknotx.version=2.0.0-SNAPSHOT build
+      ./gradlew build
     displayName: "Build Starter Kit"
