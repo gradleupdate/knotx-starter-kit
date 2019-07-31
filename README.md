@@ -98,3 +98,6 @@ You need to build SNAPSHOT Docker image locally. The easiest approach is to use 
 to clone and build all Knot.x modules. Then you need to build base [Knot.x Docker](https://github.com/Knotx/knotx-docker) image.
 
 Now you can update `gradle.properties` with SNAPSHOT version.
+
+## CI
+This modules is validated via the Knot.x CI pipeline (Azure Pipeline).
