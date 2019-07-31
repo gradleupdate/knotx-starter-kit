@@ -1,3 +1,5 @@
+[![Build Status](https://dev.azure.com/knotx/Knotx/_apis/build/status/Knotx.knotx-starter-kit?branchName=master)](https://dev.azure.com/knotx/Knotx/_build/latest?definitionId=3&branchName=master)
+
 # Knot.x Starter Kit
 Knot.x Starter Kit is a template project that simplifies Knot.x project setup. It allows you to 
 customize the [Knot.x distribution](https://github.com/Knotx/knotx-stack) with your own modules and
@@ -98,6 +100,3 @@ You need to build SNAPSHOT Docker image locally. The easiest approach is to use 
 to clone and build all Knot.x modules. Then you need to build base [Knot.x Docker](https://github.com/Knotx/knotx-docker) image.
 
 Now you can update `gradle.properties` with SNAPSHOT version.
-
-## CI
-This modules is validated via the Knot.x CI pipeline (Azure Pipeline).
