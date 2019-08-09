@@ -31,6 +31,17 @@ buildscript {
 
 val dockerImageRef = "$buildDir/.docker/buildImage-imageId.txt"
 
+
+tasks.register<Copy>("copyDockerfile") {
+    group = "docker"
+
+    from("docker")
+    into("$buildDir")
+    expand("knotx_version" to project.property("knotx.docker.version"))
+
+    mustRunAfter("cleanDistribution")
+}
+
 tasks.create("removeImage", DockerRemoveImage::class) {
     group = "docker"
 
@@ -90,3 +101,11 @@ tasks.create("runTest", Test::class) {
 
     include("**/*ITCase*")
 }
+
+tasks.register("prepareDocker") {
+    dependsOn("cleanDistribution", "assembleBaseDistribution", "copyDockerfile")
+}
+
+/*tasks.register("prepareDocker") {
+    dependsOn("cleanDistribution", "copyModulesWithDeps", "copyBin", "copyConfigs", "copyDockerfile")
+}*?

@@ -14,12 +14,9 @@
  * limitations under the License.
  */
 plugins {
+    id("io.knotx.distribution")  version "0.1.2"
     id("com.bmuschko.docker-remote-api") version "4.9.0"
     id("java")
-}
-
-configurations {
-    register("dist")
 }
 
 dependencies {
@@ -46,7 +43,7 @@ tasks.named("build") {
     dependsOn("runTest")
 }
 
-apply(from = "gradle/distribution.gradle.kts")
+//apply(from = "gradle/distribution.gradle.kts")
 apply(from = "gradle/javaAndUnitTests.gradle.kts")
 apply(from = "gradle/docker.gradle.kts")
 
