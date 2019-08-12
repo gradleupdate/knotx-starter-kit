@@ -43,7 +43,6 @@ tasks.named("build") {
     dependsOn("runTest")
 }
 
-//apply(from = "gradle/distribution.gradle.kts")
 apply(from = "gradle/javaAndUnitTests.gradle.kts")
 apply(from = "gradle/docker.gradle.kts")
 

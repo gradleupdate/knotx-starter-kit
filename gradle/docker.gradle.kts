@@ -20,23 +20,18 @@ import com.bmuschko.gradle.docker.tasks.container.extras.DockerWaitHealthyContai
 import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
 import com.bmuschko.gradle.docker.tasks.image.DockerRemoveImage
 
-
 val dockerImageRef = "$buildDir/.docker/buildImage-imageId.txt"
-
 
 tasks.register<Copy>("copyDockerfile") {
     group = "docker"
-
     from("docker")
     into("$buildDir")
     expand("knotx_version" to project.property("knotx.version"))
-
     mustRunAfter("cleanDistribution")
 }
 
-tasks.create("removeImage", DockerRemoveImage::class) {
+tasks.register<DockerRemoveImage>("removeImage") {
     group = "docker"
-
     val spec = object : Spec<Task> {
         override fun isSatisfiedBy(task: Task): Boolean {
             return File(dockerImageRef).exists()
@@ -83,7 +78,7 @@ tasks.register<DockerWaitHealthyContainer>("waitContainer") {
     targetContainerId(createContainer.get().containerId)
 }
 
-val stopContainer by tasks.creating(DockerStopContainer::class) {
+tasks.register<DockerStopContainer>("stopContainer") {
     group = "docker-functional-tests"
     targetContainerId(createContainer.get().containerId)
 }
@@ -91,15 +86,10 @@ val stopContainer by tasks.creating(DockerStopContainer::class) {
 tasks.register("runTest", Test::class) {
     group = "docker-functional-tests"
     dependsOn(tasks.named("waitContainer"))
-    finalizedBy(stopContainer)
-
+    finalizedBy(tasks.named("stopContainer"))
     include("**/*ITCase*")
 }
 
 tasks.register("prepareDocker") {
     dependsOn("cleanDistribution", "assembleBaseDistribution", "copyDockerfile")
 }
-
-/*tasks.register("prepareDocker") {
-    dependsOn("cleanDistribution", "copyModulesWithDeps", "copyBin", "copyConfigs", "copyDockerfile")
-}*?
