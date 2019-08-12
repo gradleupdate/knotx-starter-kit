@@ -91,5 +91,5 @@ tasks.register("runTest", Test::class) {
 }
 
 tasks.register("prepareDocker") {
-    dependsOn("cleanDistribution", "assembleBaseDistribution", "copyDockerfile")
+    dependsOn("cleanDistribution", "overwriteCustomFiles", "copyDockerfile")
 }
