@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 plugins {
-    id("io.knotx.distribution")  version "0.1.2"
-    id("com.bmuschko.docker-remote-api") version "4.9.0"
+    id("io.knotx.distribution")
+    id("com.bmuschko.docker-remote-api")
     id("java")
 }
 
