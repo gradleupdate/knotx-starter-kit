@@ -15,8 +15,8 @@
  */
 pluginManagement {
     repositories {
-        gradlePluginPortal()
         mavenLocal()
+        gradlePluginPortal()
     }
 }
 rootProject.name = "knotx-starter-kit"
