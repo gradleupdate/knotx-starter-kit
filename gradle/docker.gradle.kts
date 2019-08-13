@@ -20,20 +20,18 @@ import com.bmuschko.gradle.docker.tasks.container.extras.DockerWaitHealthyContai
 import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
 import com.bmuschko.gradle.docker.tasks.image.DockerRemoveImage
 
-buildscript {
-    repositories {
-        gradlePluginPortal()
-    }
-    dependencies {
-        classpath("com.bmuschko:gradle-docker-plugin:4.9.0")
-    }
-}
-
 val dockerImageRef = "$buildDir/.docker/buildImage-imageId.txt"
 
-tasks.create("removeImage", DockerRemoveImage::class) {
+tasks.register<Copy>("copyDockerfile") {
     group = "docker"
+    from("docker")
+    into("$buildDir")
+    expand("knotx_version" to project.property("knotx.version"))
+    mustRunAfter("cleanDistribution")
+}
 
+tasks.register<DockerRemoveImage>("removeImage") {
+    group = "docker"
     val spec = object : Spec<Task> {
         override fun isSatisfiedBy(task: Task): Boolean {
             return File(dockerImageRef).exists()
@@ -48,45 +46,50 @@ tasks.create("removeImage", DockerRemoveImage::class) {
     }
 }
 
-val buildImage by tasks.creating(DockerBuildImage::class) {
+tasks.register<DockerBuildImage> ("buildImage") {
     group = "docker"
     inputDir.set(file("$buildDir"))
     tags.add("${project.property("docker.image.name")}:latest")
     dependsOn("removeImage", "prepareDocker")
 }
+val buildImage = tasks.named<DockerBuildImage>("buildImage")
 
 // FUNCTIONAL TESTS
 
-val createContainer by tasks.creating(DockerCreateContainer::class) {
+tasks.register<DockerCreateContainer>("createContainer") {
     group = "docker-functional-tests"
     dependsOn(buildImage)
-    targetImageId(buildImage.getImageId())
+    targetImageId(buildImage.get().imageId)
     portBindings.set(listOf("8092:8092"))
     exposePorts("tcp", listOf(8092))
     autoRemove.set(true)
 }
+val createContainer = tasks.named<DockerCreateContainer>("createContainer")
 
-val startContainer by tasks.creating(DockerStartContainer::class) {
+tasks.register<DockerStartContainer>("startContainer") {
     group = "docker-functional-tests"
     dependsOn(createContainer)
-    targetContainerId(createContainer.containerId)
+    targetContainerId(createContainer.get().containerId)
 }
 
-val waitContainer by tasks.creating(DockerWaitHealthyContainer::class) {
+tasks.register<DockerWaitHealthyContainer>("waitContainer") {
     group = "docker-functional-tests"
-    dependsOn(startContainer)
-    targetContainerId(createContainer.containerId)
+    dependsOn(tasks.named("startContainer"))
+    targetContainerId(createContainer.get().containerId)
 }
 
-val stopContainer by tasks.creating(DockerStopContainer::class) {
+tasks.register<DockerStopContainer>("stopContainer") {
     group = "docker-functional-tests"
-    targetContainerId(createContainer.containerId)
+    targetContainerId(createContainer.get().containerId)
 }
 
-tasks.create("runTest", Test::class) {
+tasks.register("runTest", Test::class) {
     group = "docker-functional-tests"
-    dependsOn(waitContainer)
-    finalizedBy(stopContainer)
-
+    dependsOn(tasks.named("waitContainer"))
+    finalizedBy(tasks.named("stopContainer"))
     include("**/*ITCase*")
+}
+
+tasks.register("prepareDocker") {
+    dependsOn("cleanDistribution", "overwriteCustomFiles", "copyDockerfile")
 }
