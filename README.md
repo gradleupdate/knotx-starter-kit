@@ -5,29 +5,28 @@ Starter Kit is a template project that simplifies Knot.x project setup. It allow
 customize the [Knot.x distribution](https://github.com/Knotx/knotx-stack) with your own modules and
 configuration entries. 
 
-Starter Kit artefacts (see the build/distributions folder) are: 
+Starter Kit artifacts (see the build/distributions folder) are: 
 - a ZIP file when `./gradlew build-stack` or `./gradlew build`
 - a custom Docker image when `./gradlew build-docker`
 
-### Prerequisites
-Follow [Development process](https://github.com/Knotx/knotx-aggregator) instructions to build all 
-SNAPSHOT artefacts.
-
 ## How to build & run
-To start a new Knot.x project simply download the chosen ZIP version from https://github.com/Knotx/knotx-starter-kit/tags.
+To start a new Knot.x project simply download the chosen ZIP version from https://github.com/Knotx/knotx-starter-kit/tags
+or use the development one (from the `master` branch). Follow [Development process](https://github.com/Knotx/knotx-aggregator) 
+instructions when use the development version.
 
-### ZIP file
-In the unziped folder run
+Then unzip Starter Kit and run:
+
+### Build ZIP distribution
 ```
 $> ./gradlew build-stack
 ```
 to:
 - build all your custom Knot.x modules
-- download Knot.x Stack artefact, add all required dependencies (including your custom modules and 
+- download Knot.x Stack artifact, add all required dependencies (including your custom modules and 
 its transitive dependencies), override configs with `/knotx/config`
-- build the custom ZIP artefact
+- build the custom ZIP artifact
 
-Then, go to the `build/distributions` directory, unzip the ZIP artefact, start Knot.x:
+Then, go to the `build/distributions` directory, unzip the ZIP artifact, start Knot.x:
 ```
 chmod +x bin/knotx
 bin/knotx run-knotx
@@ -37,8 +36,7 @@ and validate urls:
 - [localhost:8092/api/v1/example](http://localhost:8092/api/v1/example)
 - [localhost:8092/api/v2/example](http://localhost:8092/api/v2/example)
 
-### Docker
-In the unziped folder run
+### Build & validate Docker image
 ```
 $> ./gradlew build-docker
 ```
