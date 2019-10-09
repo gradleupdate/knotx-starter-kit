@@ -40,7 +40,20 @@ allprojects {
 }
 
 tasks.named("build") {
+    dependsOn("build-stack")
+}
+
+tasks.register("build-docker") {
+    group = "docker"
+    // https://github.com/Knotx/knotx-gradle-plugins/blob/master/src/main/kotlin/io/knotx/distribution.gradle.kts
     dependsOn("runTest")
+}
+
+tasks.register("build-stack") {
+    group = "stack"
+    // https://github.com/Knotx/knotx-gradle-plugins/blob/master/src/main/kotlin/io/knotx/distribution.gradle.kts
+    dependsOn("assembleCustomDistribution")
+    mustRunAfter("build-docker")
 }
 
 apply(from = "gradle/javaAndUnitTests.gradle.kts")
