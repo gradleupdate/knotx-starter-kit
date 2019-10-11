@@ -83,7 +83,7 @@ tasks.register<DockerStopContainer>("stopContainer") {
     targetContainerId(createContainer.get().containerId)
 }
 
-tasks.register("runTest", Test::class) {
+tasks.register("runFunctionalTest", Test::class) {
     group = "docker-functional-tests"
     dependsOn(tasks.named("waitContainer"))
     finalizedBy(tasks.named("stopContainer"))

@@ -45,7 +45,7 @@ tasks.named("build") {
 
 tasks.register("build-docker") {
     group = "docker"
-    dependsOn("runTest")
+    dependsOn("runFunctionalTest")
 }
 
 tasks.register("build-stack") {
