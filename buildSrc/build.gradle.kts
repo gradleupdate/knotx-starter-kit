@@ -4,6 +4,6 @@ repositories {
     gradlePluginPortal()
 }
 dependencies {
-    implementation("com.bmuschko:gradle-docker-plugin:4.10.0")
+    implementation("com.bmuschko:gradle-docker-plugin:5.3.0")
     implementation("io.knotx:knotx-gradle-plugins:0.1.2")
 }

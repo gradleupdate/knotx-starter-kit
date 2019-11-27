@@ -19,6 +19,7 @@ import com.bmuschko.gradle.docker.tasks.container.DockerStopContainer
 import com.bmuschko.gradle.docker.tasks.container.extras.DockerWaitHealthyContainer
 import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
 import com.bmuschko.gradle.docker.tasks.image.DockerRemoveImage
+import java.time.Duration
 
 val dockerImageRef = "$buildDir/.docker/buildImage-imageId.txt"
 
@@ -76,6 +77,7 @@ tasks.register<DockerWaitHealthyContainer>("waitContainer") {
     group = "docker-functional-tests"
     dependsOn(tasks.named("startContainer"))
     targetContainerId(createContainer.get().containerId)
+    awaitStatusTimeout.set(60) // in seconds
 }
 
 tasks.register<DockerStopContainer>("stopContainer") {
