@@ -3,6 +3,8 @@ All notable changes to `knotx-server-http` will be documented in this file.
 
 ## Unreleased
 List of changes that are finished but not yet released in any final version.
+                
+## 2.2.0
 - [PR-34](https://github.com/Knotx/knotx-starter-kit/pull/34) - Knotx/knotx-aggregator#19 Releasing with Gradle.
 - [PR-35](https://github.com/Knotx/knotx-starter-kit/pull/35) - Knotx/knotx-fragments#154 Update Fragment modules dependencies.
 - [PR-31](https://github.com/Knotx/knotx-starter-kit/pull/31) - Knotx/knotx-fragments#135 Extract actions Core & API.
