@@ -57,6 +57,30 @@ and validate urls:
 - [localhost:8092/api/v1/example](http://localhost:8092/api/v1/example)
 - [localhost:8092/api/v2/example](http://localhost:8092/api/v2/example)
 
+### Knot.x version and depencendies
+Knot.x Starter Kit requires Knot.x to run. The version of Knot.x currently ised is defined in the `gradle.properties` as `knotxVersion`. 
+If you want to upgrade to the newer version of Knot.x this is the only place you need to change in the future.
+
+Especially important dependency is the [distribution plugin](https://github.com/Knotx/knotx-gradle-plugins#distribution-plugin)
+which is applied in the `pluginManagement` in `settings.gradle`.
+
+#### Knot.x as a sub-module of the bigger project
+When you use Knot.x Starter Kit template as a module of a bigger Gradle project, the application of Knot.x gradle plugins from `settings.gradle` will not work.
+Instead of the `pluginManagement` in the `settings.gradle` add following section at the top of main `build.gradle.kts`:
+
+```kotlin
+buildscript {
+  repositories {
+    jcenter()
+    mavenLocal() // only if you need a SNAPSHOT version of Knot.x
+  }
+  
+  dependencies.classpath("io.knotx:knotx-gradle-plugins:${project.property("knotxVersion")}")
+}
+
+apply (plugin = "io.knotx.distribution")
+```
+
 ## What does it contain
 
 ### Custom modules
