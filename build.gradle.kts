@@ -38,6 +38,14 @@ allprojects {
         maven { url = uri("https://oss.sonatype.org/content/groups/staging/") }
         maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots") }
     }
+
+    pluginManager.withPlugin("java") {
+        java {
+            toolchain {
+                languageVersion.set(JavaLanguageVersion.of(8))
+            }
+        }
+    }
 }
 
 tasks.named("build") {
